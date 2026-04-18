@@ -1,0 +1,18 @@
+{
+  "title": "AF Sonnic",
+  "tagline": "Electronic grooves and cinematic energy.",
+  "description": "Official smart links and release hub for Loki Artist.",
+  "primaryCta": {
+    "label": "Pre-Save New Single",
+    "url": "https://share.amuse.io/track/af-sonnic-years-2022"
+  },
+  "analytics": {
+    "ga4MeasurementId": "G-XXXXXXXXXX",
+    "metaPixelId": "000000000000000"
+  },
+  "social": {
+    "instagram": "https://instagram.com/yourhandle",
+    "youtube": "https://youtube.com/@murlexmurlex",
+    "tiktok": "https://www.tiktok.com/@yourhandle"
+  }
+}

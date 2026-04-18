@@ -1,0 +1,248 @@
+:root {
+  --bg-start: #f8f2e7;
+  --bg-mid: #ffe0b5;
+  --bg-end: #f68f6e;
+  --ink-strong: #1f1a17;
+  --ink-soft: #403530;
+  --surface: rgba(255, 248, 238, 0.82);
+  --line: rgba(58, 38, 25, 0.2);
+  --accent: #d9432d;
+  --accent-2: #ef7d57;
+  --radius-lg: 22px;
+  --radius-sm: 14px;
+  --shadow: 0 14px 32px rgba(110, 45, 20, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink-strong);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+  overflow-x: hidden;
+}
+
+.page {
+  position: relative;
+  padding: 2.5rem 1rem 4rem;
+}
+
+.shell {
+  position: relative;
+  z-index: 2;
+  width: min(980px, 100%);
+  margin: 0 auto 1.6rem;
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+}
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(24px);
+  animation: float 11s ease-in-out infinite;
+}
+
+.orb-one {
+  width: 280px;
+  height: 280px;
+  background: rgba(255, 126, 81, 0.5);
+  top: -40px;
+  left: -60px;
+}
+
+.orb-two {
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 216, 122, 0.5);
+  top: 28%;
+  right: -120px;
+  animation-delay: 1.2s;
+}
+
+.orb-three {
+  width: 220px;
+  height: 220px;
+  background: rgba(190, 86, 47, 0.45);
+  bottom: -80px;
+  left: 14%;
+  animation-delay: 2.2s;
+}
+
+.hero h1,
+h2 {
+  margin: 0;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.tagline {
+  margin: 0.8rem 0 1.2rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.28rem);
+  color: var(--ink-soft);
+}
+
+.primary-cta {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff7f4;
+  background: linear-gradient(110deg, var(--accent), var(--accent-2));
+  padding: 0.9rem 1.3rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.primary-cta:hover,
+.primary-cta:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+}
+
+.links h2,
+.social h2,
+.privacy h2 {
+  font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+}
+
+.link-grid {
+  margin-top: 0.95rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.8rem;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--ink-strong);
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.58);
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.link-card:hover,
+.link-card:focus-visible {
+  transform: translateX(3px);
+  border-color: rgba(217, 67, 45, 0.5);
+}
+
+.link-name {
+  font-weight: 700;
+}
+
+.link-arrow {
+  opacity: 0.7;
+}
+
+.social-row {
+  margin-top: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.social-pill {
+  text-decoration: none;
+  color: var(--ink-strong);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.62rem 1rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.social-pill:hover,
+.social-pill:focus-visible {
+  border-color: rgba(217, 67, 45, 0.55);
+}
+
+.privacy p {
+  color: var(--ink-soft);
+  max-width: 72ch;
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.6rem;
+}
+
+.consent-btn {
+  border: 1px solid rgba(90, 39, 19, 0.25);
+  background: #fff4ea;
+  color: var(--ink-strong);
+  border-radius: 12px;
+  font-weight: 700;
+  padding: 0.58rem 0.92rem;
+  cursor: pointer;
+}
+
+.consent-btn.secondary {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.consent-status {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 1rem 0.7rem 2.4rem;
+  }
+
+  .shell {
+    padding: 1.1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 14vw, 4.4rem);
+  }
+}

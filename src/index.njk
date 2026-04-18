@@ -1,0 +1,58 @@
+---
+layout: layout.njk
+title: Loki Artist | Smart Links
+---
+<main class="page">
+  <section class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+  </section>
+
+  <section class="hero shell">
+    <p class="eyebrow">Release Hub</p>
+    <h1>{{ site.title }}</h1>
+    <p class="tagline">{{ site.tagline }}</p>
+    <a class="primary-cta track-event" href="{{ site.primaryCta.url }}" data-track-event="primary_cta_click" data-track-label="hero_presave" target="_blank" rel="noopener noreferrer">{{ site.primaryCta.label }}</a>
+  </section>
+
+  <section class="links shell">
+    <h2>Listen Everywhere</h2>
+    <div class="link-grid">
+      {% for item in links %}
+        <a
+          class="link-card track-event"
+          href="{{ item.url }}"
+          data-track-event="outbound_stream_click"
+          data-track-label="{{ item.name }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="link-name">{{ item.name }}</span>
+          <span class="link-arrow" aria-hidden="true">→</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="social shell">
+    <h2>Follow The Journey</h2>
+    <div class="social-row">
+      <a class="social-pill track-event" href="{{ site.social.instagram }}" data-track-event="social_click" data-track-label="instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a class="social-pill track-event" href="{{ site.social.youtube }}" data-track-event="social_click" data-track-label="youtube" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a class="social-pill track-event" href="{{ site.social.tiktok }}" data-track-event="social_click" data-track-label="tiktok" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </div>
+  </section>
+
+  <section class="privacy shell">
+    <h2>Tracking Preferences</h2>
+    <p>
+      This page can use Google Analytics 4 and Meta Pixel to measure link clicks and campaign performance.
+    </p>
+    <div class="consent-actions">
+      <button id="consent-allow" class="consent-btn">Allow Tracking</button>
+      <button id="consent-deny" class="consent-btn secondary">Decline Tracking</button>
+    </div>
+    <p class="consent-status" id="consent-status">No preference selected yet.</p>
+  </section>
+</main>
