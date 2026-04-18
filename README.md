@@ -1,6 +1,7 @@
-# music-landing
+# afsonnic.github.io
 
 Hypeddit-style artist landing page built with Eleventy and deployed to GitHub Pages.
+Live URL: **https://afsonnic.github.io**
 
 ## What this project includes
 
@@ -15,7 +16,7 @@ Hypeddit-style artist landing page built with Eleventy and deployed to GitHub Pa
 
 - Node.js 20+
 - GitHub account
-- A GitHub repository named `music-landing`
+- A GitHub repository named **`afsonnic.github.io`** (this gives you the clean root URL)
 
 ## 2) Local setup
 
