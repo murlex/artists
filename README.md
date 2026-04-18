@@ -111,7 +111,43 @@ Update these files:
   - user/org sites (`username.github.io`)
   - project sites (`username.github.io/music-landing`)
 
-## 10) Updating future releases
+## 10) Set up custom domain (afsonnic.com)
+
+### Step A — Buy and prepare the domain on GoDaddy
+1. Purchase `afsonnic.com` on [GoDaddy](https://www.godaddy.com).
+2. In GoDaddy dashboard go to **My Products → DNS** (or **Manage DNS** next to the domain).
+3. Delete the default A record that points to GoDaddy's parking page (`@` → Parked).
+4. Delete any default CNAME for `www` if present.
+5. Add these records:
+
+| Type  | Name | Value                | TTL    |
+|-------|------|----------------------|--------|
+| A     | @    | 185.199.108.153      | 1 Hour |
+| A     | @    | 185.199.109.153      | 1 Hour |
+| A     | @    | 185.199.110.153      | 1 Hour |
+| A     | @    | 185.199.111.153      | 1 Hour |
+| CNAME | www  | afsonnic.github.io   | 1 Hour |
+
+> These are GitHub's official Pages IP addresses. All four A records are needed for redundancy.
+
+### Step B — Configure GitHub Pages
+1. Go to your `afsonnic.github.io` repo on GitHub.
+2. Open **Settings → Pages**.
+3. Under **Custom domain**, type `afsonnic.com` and click **Save**.
+4. GitHub will run a DNS check (can take a few minutes).
+5. Once verified, tick **Enforce HTTPS** (free SSL via Let's Encrypt).
+
+### Step C — The CNAME file (already done)
+`CNAME` is already committed in the root of this project with `afsonnic.com`.
+The deploy workflow copies it to the site output automatically — no extra action needed.
+
+### DNS propagation
+Changes typically propagate within **15 minutes to 2 hours**, but can take up to 48 hours.
+You can check progress at https://dnschecker.org (search for `afsonnic.com`, type A).
+
+---
+
+## 11) Updating future releases
 
 - Change primary campaign CTA in `src/_data/site.json`.
 - Update platform links in `src/_data/links.json`.
