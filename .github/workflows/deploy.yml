@@ -37,7 +37,9 @@ jobs:
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           OWNER_NAME="${GITHUB_REPOSITORY%/*}"
 
-          if [ "$REPO_NAME" = "$OWNER_NAME.github.io" ]; then
+          if [ -f CNAME ]; then
+            echo "ELEVENTY_PATH_PREFIX=/" >> $GITHUB_ENV
+          elif [ "$REPO_NAME" = "$OWNER_NAME.github.io" ]; then
             echo "ELEVENTY_PATH_PREFIX=/" >> $GITHUB_ENV
           else
             echo "ELEVENTY_PATH_PREFIX=/$REPO_NAME/" >> $GITHUB_ENV
