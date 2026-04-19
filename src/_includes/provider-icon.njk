@@ -1,0 +1,31 @@
+{% set provider = (name or "") | lower %}
+{% set faviconDomain = "" %}
+{% if "spotify" in provider %}
+  {% set faviconDomain = "spotify.com" %}
+{% elif "apple" in provider %}
+  {% set faviconDomain = "music.apple.com" %}
+{% elif "youtube music" in provider or ("youtube" in provider and "music" in provider) %}
+  {% set faviconDomain = "music.youtube.com" %}
+{% elif "youtube" in provider %}
+  {% set faviconDomain = "youtube.com" %}
+{% elif "soundcloud" in provider %}
+  {% set faviconDomain = "soundcloud.com" %}
+{% elif "tidal" in provider %}
+  {% set faviconDomain = "tidal.com" %}
+{% elif "deezer" in provider %}
+  {% set faviconDomain = "deezer.com" %}
+{% elif "bandcamp" in provider %}
+  {% set faviconDomain = "bandcamp.com" %}
+{% elif "amazon" in provider %}
+  {% set faviconDomain = "music.amazon.com" %}
+{% endif %}
+<span class="provider-icon provider-favicon" aria-hidden="true">
+  {% if faviconDomain %}
+    <img src="https://www.google.com/s2/favicons?domain={{ faviconDomain }}&sz=32" alt="" width="20" height="20" loading="lazy">
+  {% else %}
+    <svg viewBox="0 0 24 24" focusable="false">
+      <circle cx="12" cy="12" r="10" fill="currentColor"></circle>
+      <path d="M10 8.2v8.1a2.1 2.1 0 1 1-1.4-2V9.2l6-1.2v6.5a2.1 2.1 0 1 1-1.4-2V6.8Z" fill="var(--surface)"></path>
+    </svg>
+  {% endif %}
+</span>

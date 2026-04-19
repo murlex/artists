@@ -1,16 +1,16 @@
 :root {
-  --bg-start: #f8f2e7;
-  --bg-mid: #ffe0b5;
-  --bg-end: #f68f6e;
-  --ink-strong: #1f1a17;
-  --ink-soft: #403530;
-  --surface: rgba(255, 248, 238, 0.82);
-  --line: rgba(58, 38, 25, 0.2);
-  --accent: #d9432d;
-  --accent-2: #ef7d57;
+  --bg-start: #18110f;
+  --bg-mid: #2f1d18;
+  --bg-end: #4f2a1f;
+  --ink-strong: #f6eee8;
+  --ink-soft: #d9c3b6;
+  --surface: rgba(34, 22, 19, 0.82);
+  --line: rgba(255, 232, 216, 0.14);
+  --accent: #ff784f;
+  --accent-2: #ff9e6e;
   --radius-lg: 22px;
   --radius-sm: 14px;
-  --shadow: 0 14px 32px rgba(110, 45, 20, 0.22);
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
 }
 
 * {
@@ -44,6 +44,13 @@ body {
   box-shadow: var(--shadow);
 }
 
+.hero,
+.releases,
+.social,
+.privacy {
+  text-align: center;
+}
+
 .ambient-bg {
   position: fixed;
   inset: 0;
@@ -61,7 +68,7 @@ body {
 .orb-one {
   width: 280px;
   height: 280px;
-  background: rgba(255, 126, 81, 0.5);
+  background: rgba(255, 120, 79, 0.26);
   top: -40px;
   left: -60px;
 }
@@ -69,7 +76,7 @@ body {
 .orb-two {
   width: 320px;
   height: 320px;
-  background: rgba(255, 216, 122, 0.5);
+  background: rgba(255, 175, 109, 0.22);
   top: 28%;
   right: -120px;
   animation-delay: 1.2s;
@@ -78,7 +85,7 @@ body {
 .orb-three {
   width: 220px;
   height: 220px;
-  background: rgba(190, 86, 47, 0.45);
+  background: rgba(186, 84, 48, 0.24);
   bottom: -80px;
   left: 14%;
   animation-delay: 2.2s;
@@ -110,10 +117,27 @@ h2 {
   color: var(--ink-soft);
 }
 
+.hero-release {
+  margin: 0 0 1rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.release-date {
+  margin: 0 0 0.6rem;
+  color: var(--ink-soft);
+}
+
+.release-date {
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .primary-cta {
   display: inline-block;
   text-decoration: none;
-  color: #fff7f4;
+  color: #140f0d;
   background: linear-gradient(110deg, var(--accent), var(--accent-2));
   padding: 0.9rem 1.3rem;
   border-radius: var(--radius-sm);
@@ -128,10 +152,81 @@ h2 {
   filter: brightness(1.07);
 }
 
-.links h2,
+.primary-cta.small {
+  padding: 0.6rem 0.9rem;
+  font-size: 0.92rem;
+}
+
+.releases h2,
 .social h2,
 .privacy h2 {
   font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+}
+
+.release-stack {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.release-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(24, 16, 14, 0.52);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.release-media {
+  margin-bottom: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.release-media picture {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.release-artwork {
+  width: min(100%, 420px);
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 232, 216, 0.12);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
+}
+
+.release-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.release-header h3 {
+  margin: 0;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  letter-spacing: 0.05em;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+}
+
+.release-meta {
+  margin-bottom: 0.9rem;
+}
+
+.release-date.small {
+  margin-bottom: 0.3rem;
 }
 
 .link-grid {
@@ -139,6 +234,9 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 0.8rem;
+  width: min(100%, 620px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .link-card {
@@ -150,14 +248,49 @@ h2 {
   padding: 0.95rem 1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.04);
   transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.link-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
 }
 
 .link-card:hover,
 .link-card:focus-visible {
   transform: translateX(3px);
   border-color: rgba(217, 67, 45, 0.5);
+}
+
+.provider-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-strong);
+  flex: 0 0 auto;
+}
+
+.provider-icon.is-generic {
+  color: #5f5148;
+}
+
+.provider-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+.provider-icon.provider-favicon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 4px;
 }
 
 .link-name {
@@ -171,18 +304,22 @@ h2 {
 .social-row {
   margin-top: 0.95rem;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0.65rem;
 }
 
 .social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   text-decoration: none;
   color: var(--ink-strong);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.62rem 1rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .social-pill:hover,
@@ -190,21 +327,51 @@ h2 {
   border-color: rgba(217, 67, 45, 0.55);
 }
 
+.social-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+.social-icon.is-generic {
+  color: var(--ink-soft);
+}
+
+.social-icon.social-favicon img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 3px;
+}
+
 .privacy p {
   color: var(--ink-soft);
   max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .consent-actions {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0.55rem;
   margin-top: 0.6rem;
 }
 
 .consent-btn {
-  border: 1px solid rgba(90, 39, 19, 0.25);
-  background: #fff4ea;
+  border: 1px solid rgba(255, 232, 216, 0.16);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--ink-strong);
   border-radius: 12px;
   font-weight: 700;
@@ -213,7 +380,7 @@ h2 {
 }
 
 .consent-btn.secondary {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .consent-status {
@@ -233,7 +400,7 @@ h2 {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .page {
     padding: 1rem 0.7rem 2.4rem;
   }
@@ -244,5 +411,13 @@ h2 {
 
   .hero h1 {
     font-size: clamp(2.4rem, 14vw, 4.4rem);
+  }
+
+  .release-artwork {
+    width: min(100%, 280px);
+  }
+
+  .link-grid {
+    grid-template-columns: 1fr;
   }
 }

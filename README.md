@@ -1,5 +1,7 @@
 # afsonnic.github.io
 
+[![Deploy To GitHub Pages](https://github.com/murlex/artists/actions/workflows/deploy.yml/badge.svg)](https://github.com/murlex/artists/actions/workflows/deploy.yml)
+
 Hypeddit-style artist landing page built with Eleventy and deployed to GitHub Pages.
 Live URL: **https://afsonnic.github.io**
 
@@ -41,11 +43,61 @@ Update these files:
   - `title`
   - `tagline`
   - `description`
-  - `primaryCta.label`
-  - `primaryCta.url`
+  - `releases` (array of release objects)
+    - `title`
+    - `slug` (optional share path, e.g. `2022` creates `/2022/`)
+    - `releaseDate` (optional display date)
+    - `artwork.src` (desktop/default cover image URL or local path like `/assets/img/cover.jpg`)
+    - `artwork.srcMobile` (optional mobile-specific cover image)
+    - `artwork.alt` (optional image alt text)
+    - `primaryCta.label`
+    - `primaryCta.url`
+    - `links[]` (`name`, `url`)
   - `social.instagram`, `social.youtube`, `social.tiktok`
 - `src/_data/links.json`
-  - Add/replace streaming platform links
+  - Optional old file; not used by the release-based pages
+
+Example release config:
+
+```json
+"releases": [
+  {
+    "title": "Years 2022",
+    "slug": "2022",
+    "releaseDate": "April 19, 2026",
+    "artwork": {
+      "src": "/assets/img/years-2022-cover.jpg",
+      "srcMobile": "/assets/img/years-2022-cover-mobile.jpg",
+      "alt": "Cover artwork for Years 2022"
+    },
+    "primaryCta": {
+      "label": "Pre-Save / Listen",
+      "url": "https://example.com/release"
+    },
+    "links": [
+      { "name": "Spotify", "url": "https://open.spotify.com/..." },
+      { "name": "Apple Music", "url": "https://music.apple.com/..." }
+    ]
+  },
+  {
+    "title": "Night Drive",
+    "status": "Previous Release",
+    "primaryCta": {
+      "label": "Listen Now",
+      "url": "https://example.com/night-drive"
+    },
+    "links": [
+      { "name": "Spotify", "url": "https://open.spotify.com/..." }
+    ]
+  }
+]
+```
+
+Local artwork workflow:
+
+1. Put image files in `src/assets/img/`.
+2. Set `artwork.src` for desktop and optionally `artwork.srcMobile` for phones.
+3. Build and deploy; the correct image will be used on `/` and release URLs like `/2022/`.
 
 ## 4) Connect Google Analytics 4 (GA4)
 
@@ -149,6 +201,7 @@ You can check progress at https://dnschecker.org (search for `afsonnic.com`, typ
 
 ## 11) Updating future releases
 
-- Change primary campaign CTA in `src/_data/site.json`.
-- Update platform links in `src/_data/links.json`.
+- Add or edit entries in `src/_data/site.json` under `releases`.
+- Each release gets its own page at `/{slug}/` (or slugified title if slug is omitted).
+- The homepage `/` shows only the first release in the array.
 - Commit and push. GitHub Actions redeploys automatically.

@@ -1,0 +1,90 @@
+<main class="page">
+  <section class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+  </section>
+
+  <section class="hero shell">
+    <p class="eyebrow">Release Hub</p>
+    <h1>{{ site.title }}</h1>
+    <p class="tagline">{{ site.tagline }}</p>
+    <p class="hero-release">{{ release.title }}</p>
+    {% if release.releaseDate %}
+      <p class="release-date">{{ release.releaseDate }}</p>
+    {% endif %}
+    <a class="primary-cta track-event" href="{{ release.primaryCta.url }}" data-track-event="primary_cta_click" data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}" target="_blank" rel="noopener noreferrer">{{ release.primaryCta.label }}</a>
+  </section>
+
+  <section class="releases shell">
+    <h2>Listen Everywhere</h2>
+    <article class="release-card">
+      {% if release.artwork and release.artwork.src %}
+        <div class="release-media">
+          <picture>
+            {% if release.artwork.srcMobile %}
+              <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
+            {% endif %}
+            <img
+              class="release-artwork"
+              src="{{ release.artwork.src | url }}"
+              alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </div>
+      {% endif %}
+      <div class="release-header">
+        <h3>{{ release.title }}</h3>
+      </div>
+      {% if release.releaseDate %}
+        <div class="release-meta">
+          {% if release.releaseDate %}
+            <p class="release-date small">Released {{ release.releaseDate }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="link-grid">
+        {% for item in release.links %}
+          <a
+            class="link-card track-event"
+            href="{{ item.url }}"
+            data-track-event="outbound_stream_click"
+            data-track-label="{{ release.title }}_{{ item.name }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="link-main">
+              {% set name = item.name %}
+              {% include "provider-icon.njk" %}
+              <span class="link-name">{{ item.name }}</span>
+            </span>
+            <span class="link-arrow" aria-hidden="true">→</span>
+          </a>
+        {% endfor %}
+      </div>
+    </article>
+  </section>
+
+  <section class="social shell">
+    <h2>Follow The Journey</h2>
+    <div class="social-row">
+      <a class="social-pill track-event" href="{{ site.social.instagram }}" data-track-event="social_click" data-track-label="instagram" target="_blank" rel="noopener noreferrer">{% set name = "Instagram" %}{% include "social-icon.njk" %}<span>Instagram</span></a>
+      <a class="social-pill track-event" href="{{ site.social.youtube }}" data-track-event="social_click" data-track-label="youtube" target="_blank" rel="noopener noreferrer">{% set name = "YouTube" %}{% include "social-icon.njk" %}<span>YouTube</span></a>
+      <a class="social-pill track-event" href="{{ site.social.tiktok }}" data-track-event="social_click" data-track-label="tiktok" target="_blank" rel="noopener noreferrer">{% set name = "TikTok" %}{% include "social-icon.njk" %}<span>TikTok</span></a>
+    </div>
+  </section>
+
+  <section class="privacy shell">
+    <h2>Tracking Preferences</h2>
+    <p>
+      This page can use Google Analytics 4 and Meta Pixel to measure link clicks and campaign performance.
+    </p>
+    <div class="consent-actions">
+      <button id="consent-allow" class="consent-btn">Allow Tracking</button>
+      <button id="consent-deny" class="consent-btn secondary">Decline Tracking</button>
+    </div>
+    <p class="consent-status" id="consent-status">No preference selected yet.</p>
+  </section>
+</main>

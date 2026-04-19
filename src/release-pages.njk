@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+pagination:
+  data: site.releases
+  size: 1
+  alias: release
+permalink: "{{ (release.slug or (release.title | slugify)) }}/index.html"
+eleventyExcludeFromCollections: true
+---
+{% include "release-page.njk" %}

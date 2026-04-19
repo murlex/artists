@@ -16,11 +16,11 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}" />
   </head>
   <body>
     {{ content | safe }}
     {% include "analytics.njk" %}
-    <script src="assets/js/tracking.js" defer></script>
+    <script src="{{ '/assets/js/tracking.js' | url }}" defer></script>
   </body>
 </html>
