@@ -12,8 +12,27 @@
     <p class="hero-release">{{ release.title }}</p>
     {% if release.releaseDate %}
       <p class="release-date">{{ release.releaseDate }}</p>
+      <p
+        class="release-countdown"
+        data-release-countdown
+        data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
+        hidden
+        aria-live="polite"
+      ></p>
     {% endif %}
-    <a class="primary-cta track-event" href="{{ release.primaryCta.url }}" data-track-event="primary_cta_click" data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}" target="_blank" rel="noopener noreferrer">{{ release.primaryCta.label }}</a>
+    <a
+      class="primary-cta track-event"
+      href="{{ release.primaryCta.url }}"
+      data-track-event="primary_cta_click"
+      data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}"
+      data-release-cta
+      data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
+      data-pre-label="{{ release.primaryCta.preReleaseLabel or 'Pre-Save' }}"
+      data-live-label="{{ release.primaryCta.postReleaseLabel or 'Listen now!' }}"
+      data-live-delay-seconds="{{ release.primaryCta.liveDelaySeconds or 30 }}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >{{ release.primaryCta.label }}</a>
   </section>
 
   <section class="releases shell">
@@ -42,6 +61,13 @@
         <div class="release-meta">
           {% if release.releaseDate %}
             <p class="release-date small">{{ release.releaseDate }}</p>
+            <p
+              class="release-countdown release-countdown-small"
+              data-release-countdown
+              data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
+              hidden
+              aria-live="polite"
+            ></p>
           {% endif %}
         </div>
       {% endif %}

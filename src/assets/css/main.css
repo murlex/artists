@@ -229,6 +229,21 @@ h2 {
   margin-bottom: 0.3rem;
 }
 
+.release-countdown {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: #ffd7c4;
+  font-weight: 600;
+}
+
+.release-countdown-small {
+  margin: 0;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
 .link-grid {
   margin-top: 0.95rem;
   display: grid;
