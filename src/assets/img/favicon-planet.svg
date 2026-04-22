@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Small brown planet">
+  <defs>
+    <radialGradient id="planetBody" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#d2a582" />
+      <stop offset="55%" stop-color="#9b6948" />
+      <stop offset="100%" stop-color="#5b3928" />
+    </radialGradient>
+    <linearGradient id="ringColor" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#7a5238" stop-opacity="0.15" />
+      <stop offset="50%" stop-color="#c08a62" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#7a5238" stop-opacity="0.15" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0 1)">
+    <ellipse cx="32" cy="33" rx="30" ry="9.5" fill="none" stroke="url(#ringColor)" stroke-width="4.8" />
+    <circle cx="32" cy="32" r="24" fill="url(#planetBody)" />
+    <path d="M15 25c7 2 16 2 25-2" fill="none" stroke="#e0bb9a" stroke-width="2.4" stroke-linecap="round" opacity="0.72" />
+    <path d="M14 36c8 3 18 3 28-1" fill="none" stroke="#6a4430" stroke-width="2.3" stroke-linecap="round" opacity="0.82" />
+    <circle cx="22" cy="21" r="2.6" fill="#7f543a" opacity="0.72" />
+    <circle cx="40" cy="39" r="2.2" fill="#4d3224" opacity="0.68" />
+    <circle cx="24" cy="24" r="13.5" fill="none" stroke="#f7d6b8" stroke-width="1.7" opacity="0.3" />
+  </g>
+</svg>
