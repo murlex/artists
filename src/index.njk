@@ -8,7 +8,6 @@ title: AF Sonnic Artist | Smart Links
   {% set releasePath = '/' + (release.slug or (release.title | slugify)) + '/' %}
   <main class="page">
     <section class="hero shell">
-      <p class="eyebrow">Release Hub</p>
       <h1>{{ site.title }}</h1>
       <p class="tagline">Redirecting to the latest release...</p>
       <p>
@@ -25,7 +24,6 @@ title: AF Sonnic Artist | Smart Links
 {% else %}
   <main class="page">
     <section class="hero shell">
-      <p class="eyebrow">Release Hub</p>
       <h1>{{ site.title }}</h1>
       <p class="tagline">No releases configured yet.</p>
     </section>
