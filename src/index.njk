@@ -5,7 +5,23 @@ title: AF Sonnic Artist | Smart Links
 {% set releases = site.releases or [] %}
 {% set release = releases[0] %}
 {% if release %}
-  {% include "release-page.njk" %}
+  {% set releasePath = '/' + (release.slug or (release.title | slugify)) + '/' %}
+  <main class="page">
+    <section class="hero shell">
+      <p class="eyebrow">Release Hub</p>
+      <h1>{{ site.title }}</h1>
+      <p class="tagline">Redirecting to the latest release...</p>
+      <p>
+        <a class="primary-cta" href="{{ releasePath | url }}">Open {{ release.title }}</a>
+      </p>
+    </section>
+  </main>
+  <script>
+    window.location.replace({{ (releasePath | url) | dump | safe }});
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url={{ releasePath | url }}" />
+  </noscript>
 {% else %}
   <main class="page">
     <section class="hero shell">
