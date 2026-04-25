@@ -139,12 +139,7 @@
     applyConsentButtons();
     updateConsentStatus();
 
-    if (localStorage.getItem("tracking-consent") === "granted") {
-      Promise.all([setupGa4(), setupMetaPixel()]).then(bindClickTracking);
-      return;
-    }
-
-    bindClickTracking();
+    Promise.all([setupGa4(), setupMetaPixel()]).then(bindClickTracking);
   }
 
   if (document.readyState === "loading") {

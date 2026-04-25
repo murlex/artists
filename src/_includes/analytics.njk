@@ -7,11 +7,6 @@
 
 <script>
   (function setupTrackingConsent() {
-    var consent = localStorage.getItem("tracking-consent");
-    if (!consent) {
-      return;
-    }
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       dataLayer.push(arguments);
@@ -19,8 +14,8 @@
 
     window.gtag = window.gtag || gtag;
     gtag("consent", "default", {
-      analytics_storage: consent === "granted" ? "granted" : "denied",
-      ad_storage: consent === "granted" ? "granted" : "denied"
+      analytics_storage: "granted",
+      ad_storage: "granted"
     });
   })();
 </script>
