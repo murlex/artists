@@ -1,6 +1,6 @@
 {
   "title": "AF Sonnic",
-  "tagline": "Electronic grooves and cinematic energy.",
+  "tagline": "Electronic soundscapes built from memory.",
   "description": "Official smart links and release hub for AF Sonnic.",
   "releases": [
     {
@@ -9,12 +9,20 @@
       "releaseDate": "Will be released on May 1, 2026",
       "releaseDateIso": "2026-05-01T00:00:00",
       "artwork": {
-        "src": "/assets/img/2022.png",
-        "srcMobile": "/assets/img/2022-mobile.jpg",
+        "src": "/assets/img/2022-desktop.jpg",
+        "srcMobile": "/assets/img/2022-mobile-opt.jpg",
         "alt": "Cover artwork for Years 2022"
       },
+      "btsVideo": "/assets/video/bts.mp4",
+      "audioTeaser": {
+        "src": "/assets/audio/teaser.mp3",
+        "label": "🎵 Hear the opening"
+      },
       "primaryCta": {
-        "label": "Pre-Save",
+        "label": "Remind Me When It Drops",
+        "preReleaseLabel": "Remind Me When It Drops",
+        "postReleaseLabel": "Listen Now",
+        "microcopy": "Free · No account needed · Just the music",
         "url": "https://share.amuse.io/track/af-sonnic-years-2022"
       },
       "links": [

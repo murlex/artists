@@ -1,11 +1,21 @@
 <main class="page">
-  <section class="ambient-bg" aria-hidden="true">
-    <div class="orb orb-one"></div>
-    <div class="orb orb-two"></div>
-    <div class="orb orb-three"></div>
-  </section>
+  {% if not release.btsVideo %}
+    <section class="ambient-bg" aria-hidden="true">
+      <div class="orb orb-one"></div>
+      <div class="orb orb-two"></div>
+      <div class="orb orb-three"></div>
+    </section>
+  {% endif %}
 
-  <section class="hero shell">
+  <section class="hero shell{% if release.btsVideo %} has-video-bg{% endif %}">
+    {% if release.btsVideo %}
+      <div class="video-bg" aria-hidden="true">
+        <video class="video-bg__video" autoplay muted loop playsinline>
+          <source src="{{ release.btsVideo | url }}" type="video/mp4">
+        </video>
+        <div class="video-bg__overlay"></div>
+      </div>
+    {% endif %}
     <h1>{{ site.title }}</h1>
     <p class="tagline">{{ site.tagline }}</p>
     <p class="hero-release">{{ release.title }}</p>
@@ -32,27 +42,38 @@
       target="_blank"
       rel="noopener noreferrer"
     >{{ release.primaryCta.label }}</a>
+    {% if release.primaryCta.microcopy %}
+      <p class="cta-microcopy">{{ release.primaryCta.microcopy }}</p>
+    {% endif %}
+    {% if release.audioTeaser %}
+      <div class="hero-teaser">
+        <p class="teaser-label">{{ release.audioTeaser.label or '🎵 Hear the opening' }}</p>
+        <audio class="teaser-player" controls preload="none">
+          <source src="{{ release.audioTeaser.src | url }}" type="audio/mpeg">
+        </audio>
+      </div>
+    {% endif %}
+    {% if release.artwork and release.artwork.src %}
+      <div class="hero-artwork">
+        <picture>
+          {% if release.artwork.srcMobile %}
+            <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
+          {% endif %}
+          <img
+            class="release-artwork"
+            src="{{ release.artwork.src | url }}"
+            alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
+    {% endif %}
   </section>
 
-  <section class="releases shell">
+  <section class="releases shell" hidden data-release-show data-release-date="{{ release.releaseDateIso or release.releaseDate }}">
     <h2>Listen Everywhere</h2>
     <article class="release-card">
-      {% if release.artwork and release.artwork.src %}
-        <div class="release-media">
-          <picture>
-            {% if release.artwork.srcMobile %}
-              <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
-            {% endif %}
-            <img
-              class="release-artwork"
-              src="{{ release.artwork.src | url }}"
-              alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </div>
-      {% endif %}
       <div class="release-header">
         <h3>{{ release.title }}</h3>
       </div>
@@ -101,7 +122,7 @@
     </div>
   </section>
 
-  <section class="privacy shell">
+  <section class="privacy shell" hidden>
     <h2>Tracking Preferences</h2>
     <p>
       This page can use Google Analytics 4 and Meta Pixel to measure link clicks and campaign performance.
