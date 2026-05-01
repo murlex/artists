@@ -14,6 +14,7 @@
         "alt": "Cover artwork for Years 2022"
       },
       "btsVideo": "/assets/video/bts.mp4",
+      "videoDensity": "sparse",
       "audioTeaser": {
         "src": "/assets/audio/teaser.mp3",
         "label": "🎵 Hear the opening"
