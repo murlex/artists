@@ -10,9 +10,17 @@
   <section class="hero shell{% if release.btsVideo %} has-video-bg{% endif %}">
     {% if release.btsVideo %}
       <div class="video-bg" aria-hidden="true">
-        <video class="video-bg__video" autoplay muted loop playsinline>
-          <source src="{{ release.btsVideo | url }}" type="video/mp4">
-        </video>
+        <div class="video-bg__strip">
+          <video class="video-bg__video" autoplay muted loop playsinline>
+            <source src="{{ release.btsVideo | url }}" type="video/mp4">
+          </video>
+          <video class="video-bg__video" autoplay muted loop playsinline>
+            <source src="{{ release.btsVideo | url }}" type="video/mp4">
+          </video>
+          <video class="video-bg__video" autoplay muted loop playsinline>
+            <source src="{{ release.btsVideo | url }}" type="video/mp4">
+          </video>
+        </div>
         <div class="video-bg__overlay"></div>
       </div>
     {% endif %}
