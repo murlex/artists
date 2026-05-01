@@ -20,7 +20,7 @@
     <p class="tagline">{{ site.tagline }}</p>
     <p class="hero-release">{{ release.title }}</p>
     {% if release.releaseDate %}
-      <p class="release-date">{{ release.releaseDate }}</p>
+      <p class="release-date" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.releaseDate }}</p>
       <p
         class="release-countdown"
         data-release-countdown
@@ -46,7 +46,7 @@
       <p class="cta-microcopy">{{ release.primaryCta.microcopy }}</p>
     {% endif %}
     {% if release.audioTeaser %}
-      <div class="hero-teaser">
+      <div class="hero-teaser" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">
         <p class="teaser-label">{{ release.audioTeaser.label or '🎵 Hear the opening' }}</p>
         <audio class="teaser-player" controls preload="none">
           <source src="{{ release.audioTeaser.src | url }}" type="audio/mpeg">
@@ -55,18 +55,28 @@
     {% endif %}
     {% if release.artwork and release.artwork.src %}
       <div class="hero-artwork">
-        <picture>
-          {% if release.artwork.srcMobile %}
-            <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
-          {% endif %}
-          <img
-            class="release-artwork"
-            src="{{ release.artwork.src | url }}"
-            alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+        <a
+          class="hero-artwork-link track-event"
+          href="{{ release.primaryCta.url }}"
+          data-track-event="primary_cta_click"
+          data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open {{ release.title }}"
+        >
+          <picture>
+            {% if release.artwork.srcMobile %}
+              <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
+            {% endif %}
+            <img
+              class="release-artwork"
+              src="{{ release.artwork.src | url }}"
+              alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+        </a>
       </div>
     {% endif %}
   </section>
@@ -80,7 +90,7 @@
       {% if release.releaseDate %}
         <div class="release-meta">
           {% if release.releaseDate %}
-            <p class="release-date small">{{ release.releaseDate }}</p>
+            <p class="release-date small" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.releaseDate }}</p>
             <p
               class="release-countdown release-countdown-small"
               data-release-countdown

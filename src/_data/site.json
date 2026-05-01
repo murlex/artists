@@ -22,25 +22,24 @@
         "label": "Remind Me When It Drops",
         "preReleaseLabel": "Remind Me When It Drops",
         "postReleaseLabel": "Listen Now",
-        "microcopy": "Free · No account needed · Just the music",
         "url": "https://share.amuse.io/track/af-sonnic-years-2022"
       },
       "links": [
         {
           "name": "Spotify",
-          "url": "https://open.spotify.com/artist/afsonnic"
+          "url": "https://open.spotify.com/album/6cmhRz1EmeU5syHhKghDG1?si=8R7HNWVATHOmU1H9qAKa4Q"
         },
         {
           "name": "Apple Music",
-          "url": "https://music.apple.com/us/artist/your-id"
+          "url": "https://music.apple.com/il/album/years-2022-single/1890858663"
         },
         {
           "name": "YouTube Music",
-          "url": "https://music.youtube.com/@murlexmurlex"
+          "url": "https://music.youtube.com/watch?v=HmHO5O31Smw&si=JH8I5dDPcrWXI09W"
         },
         {
           "name": "SoundCloud",
-          "url": "https://soundcloud.com/af-sonnic"
+          "url": "https://soundcloud.com/af-sonnic/2022a1/s-B6FUM6eatJJ?si=ae14238346af4228956f35592d158680&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
         }
       ]
     }

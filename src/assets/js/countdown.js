@@ -103,12 +103,21 @@
     return !released;
   }
 
+  function updateHideElements(elements, targetMs, now) {
+    var released = now >= targetMs;
+    elements.forEach(function (el) {
+      el.hidden = released;
+    });
+    return !released;
+  }
+
   function getOrCreateGroup(groups, targetMs) {
     if (!groups.has(targetMs)) {
       groups.set(targetMs, {
         countdowns: [],
         ctas: [],
-        shows: []
+        shows: [],
+        hides: []
       });
     }
 
@@ -136,16 +145,18 @@
     var countdownActive = updateCountdown(group.countdowns, targetMs, now);
     var ctaPending = updateCtaLabels(group.ctas, targetMs, now);
     var showPending = updateShowElements(group.shows, targetMs, now);
+    var hidePending = updateHideElements(group.hides, targetMs, now);
 
-    return countdownActive || ctaPending || showPending;
+    return countdownActive || ctaPending || showPending || hidePending;
   }
 
   function initCountdowns() {
     var countdownNodes = Array.prototype.slice.call(document.querySelectorAll("[data-release-countdown]"));
     var ctaNodes = Array.prototype.slice.call(document.querySelectorAll("[data-release-cta]"));
     var showNodes = Array.prototype.slice.call(document.querySelectorAll("[data-release-show]"));
+    var hideNodes = Array.prototype.slice.call(document.querySelectorAll("[data-release-hide]"));
 
-    if (!countdownNodes.length && !ctaNodes.length && !showNodes.length) {
+    if (!countdownNodes.length && !ctaNodes.length && !showNodes.length && !hideNodes.length) {
       return;
     }
 
@@ -160,6 +171,10 @@
 
     showNodes.forEach(function (el) {
       addReleaseElement(groups, el, "shows");
+    });
+
+    hideNodes.forEach(function (el) {
+      addReleaseElement(groups, el, "hides");
     });
 
     groups.forEach(function (group, targetMs) {
