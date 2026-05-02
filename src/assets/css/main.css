@@ -358,6 +358,10 @@ h2 {
   margin-right: auto;
 }
 
+.release-links-cta {
+  margin: 0.95rem 0 0;
+}
+
 .link-card {
   display: flex;
   align-items: center;

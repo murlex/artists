@@ -19,7 +19,12 @@
   <section class="hero shell">
     <h1>{{ site.title }}</h1>
     <p class="tagline">{{ site.tagline }}</p>
-    <p class="hero-release">{{ release.title }}</p>
+    {% if release.releaseDate %}
+      <p class="hero-release" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.title }}</p>
+      <p class="hero-release" hidden data-release-show data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.title }} is released!</p>
+    {% else %}
+      <p class="hero-release">{{ release.title }}</p>
+    {% endif %}
     {% if release.releaseDate %}
       <p class="release-date" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.releaseDate }}</p>
       <p
@@ -35,6 +40,7 @@
       href="{{ release.primaryCta.url }}"
       data-track-event="primary_cta_click"
       data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}"
+      data-release-hide
       data-release-cta
       data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
       data-pre-label="{{ release.primaryCta.preReleaseLabel or 'Pre-Save' }}"
@@ -54,74 +60,88 @@
         </audio>
       </div>
     {% endif %}
-  </section>
-
-  <section class="releases shell" hidden data-release-show data-release-date="{{ release.releaseDateIso or release.releaseDate }}">
-    <h2>Listen Everywhere</h2>
-    <article class="release-card">
-      <div class="release-header">
-        <h3>{{ release.title }}</h3>
-      </div>
-      {% if release.releaseDate %}
-        <div class="release-meta">
-          {% if release.releaseDate %}
-            <p class="release-date small" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.releaseDate }}</p>
-            <p
-              class="release-countdown release-countdown-small"
-              data-release-countdown
-              data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
-              hidden
-              aria-live="polite"
-            ></p>
-          {% endif %}
+    <div class="releases" hidden data-release-show data-release-date="{{ release.releaseDateIso or release.releaseDate }}">
+      <article class="release-card">
+        <h2>Listen Everywhere</h2>
+        <div class="release-header">
+          <h3>{{ release.title }}</h3>
         </div>
-      {% endif %}
-      <div class="link-grid">
-        {% for item in release.links %}
+        {% if release.releaseDate %}
+          <div class="release-meta">
+            {% if release.releaseDate %}
+              <p class="release-date small" data-release-hide data-release-date="{{ release.releaseDateIso or release.releaseDate }}">{{ release.releaseDate }}</p>
+              <p
+                class="release-countdown release-countdown-small"
+                data-release-countdown
+                data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
+                hidden
+                aria-live="polite"
+              ></p>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="link-grid">
+          {% for item in release.links %}
+            <a
+              class="link-card track-event"
+              href="{{ item.url }}"
+              data-track-event="outbound_stream_click"
+              data-track-label="{{ release.title }}_{{ item.name }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="link-main">
+                {% set name = item.name %}
+                {% include "provider-icon.njk" %}
+                <span class="link-name">{{ item.name }}</span>
+              </span>
+              <span class="link-arrow" aria-hidden="true">→</span>
+            </a>
+          {% endfor %}
+        </div>
+        <p class="release-links-cta">
           <a
-            class="link-card track-event"
-            href="{{ item.url }}"
-            data-track-event="outbound_stream_click"
-            data-track-label="{{ release.title }}_{{ item.name }}"
+            class="primary-cta small track-event"
+            href="{{ release.primaryCta.url }}"
+            data-track-event="primary_cta_click"
+            data-track-label="release_links_{{ release.title | lower | replace(' ', '_') }}"
+            data-release-cta
+            data-release-date="{{ release.releaseDateIso or release.releaseDate }}"
+            data-pre-label="{{ release.primaryCta.preReleaseLabel or 'Pre-Save' }}"
+            data-live-label="{{ release.primaryCta.postReleaseLabel or 'Listen now!' }}"
+            data-live-delay-seconds="{{ release.primaryCta.liveDelaySeconds or 30 }}"
             target="_blank"
             rel="noopener noreferrer"
+          >{{ release.primaryCta.label }}</a>
+        </p>
+      </article>
+      {% if release.artwork and release.artwork.src %}
+        <div class="hero-artwork">
+          <a
+            class="hero-artwork-link track-event"
+            href="{{ release.primaryCta.url }}"
+            data-track-event="primary_cta_click"
+            data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open {{ release.title }}"
           >
-            <span class="link-main">
-              {% set name = item.name %}
-              {% include "provider-icon.njk" %}
-              <span class="link-name">{{ item.name }}</span>
-            </span>
-            <span class="link-arrow" aria-hidden="true">→</span>
+            <picture>
+              {% if release.artwork.srcMobile %}
+                <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
+              {% endif %}
+              <img
+                class="release-artwork"
+                src="{{ release.artwork.src | url }}"
+                alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
           </a>
-        {% endfor %}
-      </div>
-    </article>
-    {% if release.artwork and release.artwork.src %}
-      <div class="hero-artwork">
-        <a
-          class="hero-artwork-link track-event"
-          href="{{ release.primaryCta.url }}"
-          data-track-event="primary_cta_click"
-          data-track-label="hero_{{ release.title | lower | replace(' ', '_') }}"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Open {{ release.title }}"
-        >
-          <picture>
-            {% if release.artwork.srcMobile %}
-              <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
-            {% endif %}
-            <img
-              class="release-artwork"
-              src="{{ release.artwork.src | url }}"
-              alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
-        </a>
-      </div>
-    {% endif %}
+        </div>
+      {% endif %}
+    </div>
   </section>
 
   <section class="social shell">

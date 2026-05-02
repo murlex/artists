@@ -1,7 +1,8 @@
 <script>
   window.APP_CONFIG = {
     ga4MeasurementId: "{{ site.analytics.ga4MeasurementId }}",
-    metaPixelId: "{{ site.analytics.metaPixelId }}"
+    metaPixelId: "{{ site.analytics.metaPixelId }}",
+    metaPixelIds: {{ (site.analytics.metaPixelIds or []) | dump | safe }}
   };
 </script>
 

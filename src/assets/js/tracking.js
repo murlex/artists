@@ -1,7 +1,7 @@
 (function () {
   var config = window.APP_CONFIG || {};
   var ga4Id = config.ga4MeasurementId;
-  var pixelId = config.metaPixelId;
+  var pixelIds = Array.isArray(config.metaPixelIds) ? config.metaPixelIds.slice() : [];
   var consentStatusEl = document.getElementById("consent-status");
 
   function loadScript(src) {
@@ -23,6 +23,14 @@
     return /^\d{10,20}$/.test(id || "");
   }
 
+  function getPixelIds() {
+    var ids = pixelIds.filter(isValidPixelId);
+    if (isValidPixelId(config.metaPixelId) && ids.indexOf(config.metaPixelId) === -1) {
+      ids.push(config.metaPixelId);
+    }
+    return ids;
+  }
+
   function setupGa4() {
     if (!isValidGa4Id(ga4Id)) {
       return Promise.resolve(false);
@@ -42,7 +50,9 @@
   }
 
   function setupMetaPixel() {
-    if (!isValidPixelId(pixelId)) {
+    var ids = getPixelIds();
+
+    if (!ids.length) {
       return Promise.resolve(false);
     }
 
@@ -67,7 +77,9 @@
       s.parentNode.insertBefore(t, s);
     })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
 
-    window.fbq("init", pixelId);
+    ids.forEach(function (id) {
+      window.fbq("init", id);
+    });
     window.fbq("track", "PageView");
 
     return Promise.resolve(true);

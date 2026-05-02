@@ -41,13 +41,21 @@
         {
           "name": "SoundCloud",
           "url": "https://soundcloud.com/af-sonnic/2022a1/s-B6FUM6eatJJ?si=ae14238346af4228956f35592d158680&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+        },
+        {
+          "name": "Deezer",
+          "url": "https://link.deezer.com/s/339UVmNmyFxlK65423W0r"
         }
       ]
     }
   ],
   "analytics": {
     "ga4MeasurementId": "G-QVXH2RHTVX",
-    "metaPixelId": "2046951969184192"
+    "metaPixelId": "2046951969184192",
+    "metaPixelIds": [
+      "2046951969184192",
+      "3289435151227505"
+    ]
   },
   "social": {
     "instagram": "https://www.instagram.com/af.sonnic/",
