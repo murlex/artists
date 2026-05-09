@@ -180,12 +180,14 @@ h2 {
   font-weight: 600;
   color: var(--ink-soft);
   text-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+  min-height: 1.5em;
 }
 
 .release-date {
   margin: 0 0 0.6rem;
   color: var(--ink-soft);
   text-shadow: 0 1px 7px rgba(0, 0, 0, 0.48);
+  min-height: 1.3em;
 }
 
 .release-date {
@@ -247,6 +249,8 @@ h2 {
 
 .hero-artwork picture {
   display: block;
+  width: min(100%, 200px);
+  aspect-ratio: var(--artwork-ratio, 1 / 1);
 }
 
 .hero-artwork-link {
@@ -254,7 +258,9 @@ h2 {
 }
 
 .hero-artwork .release-artwork {
-  width: min(100%, 200px);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
@@ -339,6 +345,7 @@ h2 {
   color: #ffd7c4;
   font-weight: 600;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.52);
+  min-height: 1.3em;
 }
 
 .release-countdown-small {
@@ -538,6 +545,10 @@ h2 {
 
   .release-artwork {
     width: min(100%, 280px);
+  }
+
+  .hero-artwork picture {
+    aspect-ratio: var(--artwork-ratio-mobile, var(--artwork-ratio, 1 / 1));
   }
 
   .link-grid {

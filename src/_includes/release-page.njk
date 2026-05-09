@@ -116,6 +116,12 @@
         </p>
       </article>
       {% if release.artwork and release.artwork.src %}
+        {% set artworkDesktopDims = release.artwork.src | imageDimensions %}
+        {% set artworkMobileDims = release.artwork.srcMobile | imageDimensions %}
+        {% set artworkWidth = release.artwork.width or (artworkDesktopDims and artworkDesktopDims.width) or release.artwork.mobileWidth or (artworkMobileDims and artworkMobileDims.width) or 1 %}
+        {% set artworkHeight = release.artwork.height or (artworkDesktopDims and artworkDesktopDims.height) or release.artwork.mobileHeight or (artworkMobileDims and artworkMobileDims.height) or artworkWidth %}
+        {% set artworkMobileWidth = release.artwork.mobileWidth or (artworkMobileDims and artworkMobileDims.width) or artworkWidth %}
+        {% set artworkMobileHeight = release.artwork.mobileHeight or (artworkMobileDims and artworkMobileDims.height) or artworkHeight %}
         <div class="hero-artwork">
           <a
             class="hero-artwork-link track-event"
@@ -126,7 +132,7 @@
             rel="noopener noreferrer"
             aria-label="Open {{ release.title }}"
           >
-            <picture>
+            <picture style="--artwork-ratio: {{ artworkWidth }} / {{ artworkHeight }}; --artwork-ratio-mobile: {{ artworkMobileWidth }} / {{ artworkMobileHeight }};">
               {% if release.artwork.srcMobile %}
                 <source media="(max-width: 768px)" srcset="{{ release.artwork.srcMobile | url }}" />
               {% endif %}
@@ -134,6 +140,8 @@
                 class="release-artwork"
                 src="{{ release.artwork.src | url }}"
                 alt="{{ release.artwork.alt or (release.title + ' artwork') }}"
+                width="{{ artworkWidth }}"
+                height="{{ artworkHeight }}"
                 loading="eager"
                 decoding="async"
               />
