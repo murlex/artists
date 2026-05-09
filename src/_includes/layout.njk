@@ -10,6 +10,32 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ '/' | url }}" />
     <meta name="twitter:card" content="summary_large_image" />
+    {% if release and (release.releaseDateIso or release.releaseDate) %}
+      <script>
+        (function () {
+          var rawDate = {{ (release.releaseDateIso or release.releaseDate) | dump | safe }};
+          var trimmed = String(rawDate || "").trim();
+          var date = null;
+          var isoMatch = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2})(?::(\d{2})(?::(\d{2}))?)?)?(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?$/);
+
+          if (isoMatch) {
+            date = new Date(
+              Number(isoMatch[1]),
+              Number(isoMatch[2]) - 1,
+              Number(isoMatch[3]),
+              Number(isoMatch[4] || 0),
+              Number(isoMatch[5] || 0),
+              Number(isoMatch[6] || 0),
+              0
+            );
+          } else {
+            date = new Date(trimmed);
+          }
+
+          document.documentElement.dataset.releaseState = !Number.isNaN(date.getTime()) && Date.now() >= date.getTime() ? "live" : "upcoming";
+        })();
+      </script>
+    {% endif %}
     {% if release and release.artwork and release.artwork.src %}
       <link
         rel="preload"

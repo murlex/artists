@@ -1,4 +1,8 @@
 (function () {
+  function setDocumentReleaseState(isReleased) {
+    document.documentElement.dataset.releaseState = isReleased ? "live" : "upcoming";
+  }
+
   function parseReleaseDate(value) {
     if (!value) {
       return null;
@@ -142,6 +146,7 @@
 
   function updateReleaseGroup(group, targetMs) {
     var now = Date.now();
+    setDocumentReleaseState(now >= targetMs);
     var countdownActive = updateCountdown(group.countdowns, targetMs, now);
     var ctaPending = updateCtaLabels(group.ctas, targetMs, now);
     var showPending = updateShowElements(group.shows, targetMs, now);
