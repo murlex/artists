@@ -127,21 +127,41 @@
     Promise.all([setupGa4(), setupMetaPixel()]);
   }
 
-  function scheduleTrackerBootstrap() {
-    var run = function () {
-      bootstrapTrackers();
-    };
+  function bootstrapOnFirstInteraction() {
+    var hasRegistered = false;
+    var cleanup = function () {};
 
-    if (typeof window.requestIdleCallback === "function") {
-      window.requestIdleCallback(run, { timeout: 2000 });
-    } else {
-      setTimeout(run, 1200);
+    function run() {
+      cleanup();
+      bootstrapTrackers();
     }
+
+    function register() {
+      if (hasRegistered) {
+        return;
+      }
+
+      hasRegistered = true;
+      var events = ["pointerdown", "keydown", "touchstart", "scroll"];
+
+      cleanup = function () {
+        events.forEach(function (eventName) {
+          window.removeEventListener(eventName, run, listenerOptions);
+        });
+      };
+
+      events.forEach(function (eventName) {
+        window.addEventListener(eventName, run, listenerOptions);
+      });
+    }
+
+    var listenerOptions = { once: true, passive: true };
+    register();
   }
 
   function init() {
     bindClickTracking();
-    scheduleTrackerBootstrap();
+    bootstrapOnFirstInteraction();
   }
 
   if (document.readyState === "loading") {

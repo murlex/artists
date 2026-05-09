@@ -88,7 +88,10 @@
           loadScript({{ ('/assets/js/video-panels.js' | url) | dump | safe }});
         }
 
-        if (document.querySelector("[data-release-countdown], [data-release-cta], [data-release-show], [data-release-hide]")) {
+        if (
+          document.documentElement.dataset.releaseState !== "live" &&
+          document.querySelector("[data-release-countdown], [data-release-cta], [data-release-show], [data-release-hide]")
+        ) {
           loadScript({{ ('/assets/js/countdown.js' | url) | dump | safe }});
         }
       })();

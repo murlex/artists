@@ -9,8 +9,8 @@
       "releaseDate": "Will be released on May 1, 2026",
       "releaseDateIso": "2026-05-01T00:00:00",
       "artwork": {
-        "src": "/assets/img/2022-desktop.jpg",
-        "srcMobile": "/assets/img/2022-mobile-opt.jpg",
+        "src": "/assets/img/2022-desktop-opt2.jpg",
+        "srcMobile": "/assets/img/2022-mobile-opt2.jpg",
         "alt": "Cover artwork for Years 2022"
       },
       "btsVideo": "/assets/video/bts.mp4",
