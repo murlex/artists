@@ -1,27 +1,27 @@
 {% set provider = (name or "") | lower %}
-{% set faviconDomain = "" %}
+{% set iconPath = "" %}
 {% if "spotify" in provider %}
-  {% set faviconDomain = "spotify.com" %}
+  {% set iconPath = "/assets/img/icons/spotify.png" %}
 {% elif "apple" in provider %}
-  {% set faviconDomain = "music.apple.com" %}
+  {% set iconPath = "/assets/img/icons/apple-music.png" %}
 {% elif "youtube music" in provider or ("youtube" in provider and "music" in provider) %}
-  {% set faviconDomain = "music.youtube.com" %}
+  {% set iconPath = "/assets/img/icons/youtube-music.png" %}
 {% elif "youtube" in provider %}
-  {% set faviconDomain = "youtube.com" %}
+  {% set iconPath = "/assets/img/icons/youtube.png" %}
 {% elif "soundcloud" in provider %}
-  {% set faviconDomain = "soundcloud.com" %}
+  {% set iconPath = "/assets/img/icons/soundcloud.png" %}
 {% elif "tidal" in provider %}
-  {% set faviconDomain = "tidal.com" %}
+  {% set iconPath = "/assets/img/icons/tidal.png" %}
 {% elif "deezer" in provider %}
-  {% set faviconDomain = "deezer.com" %}
+  {% set iconPath = "/assets/img/icons/deezer.png" %}
 {% elif "bandcamp" in provider %}
-  {% set faviconDomain = "bandcamp.com" %}
+  {% set iconPath = "/assets/img/icons/bandcamp.png" %}
 {% elif "amazon" in provider %}
-  {% set faviconDomain = "music.amazon.com" %}
+  {% set iconPath = "/assets/img/icons/amazon-music.png" %}
 {% endif %}
 <span class="provider-icon provider-favicon" aria-hidden="true">
-  {% if faviconDomain %}
-    <img src="https://www.google.com/s2/favicons?domain={{ faviconDomain }}&sz=32" alt="" width="20" height="20" loading="lazy">
+  {% if iconPath %}
+    <img src="{{ iconPath | url }}" alt="" width="20" height="20" loading="lazy" decoding="async" />
   {% else %}
     <svg viewBox="0 0 24 24" focusable="false">
       <circle cx="12" cy="12" r="10" fill="currentColor"></circle>

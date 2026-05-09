@@ -10,6 +10,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ '/' | url }}" />
     <meta name="twitter:card" content="summary_large_image" />
+    {% if release and release.artwork and release.artwork.src %}
+      <link
+        rel="preload"
+        as="image"
+        href="{{ release.artwork.src | url }}"
+        {% if release.artwork.srcMobile %}imagesrcset="{{ release.artwork.srcMobile | url }} 768w, {{ release.artwork.src | url }} 1200w"{% endif %}
+      />
+    {% endif %}
     <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/assets/img/favicon-planet.svg?v=3' | url }}" />
     <link rel="shortcut icon" type="image/svg+xml" href="{{ '/assets/img/favicon-planet.svg?v=3' | url }}" />
     <link rel="apple-touch-icon" href="{{ '/assets/img/favicon-planet.svg?v=3' | url }}" />
@@ -37,8 +45,27 @@
   <body>
     {{ content | safe }}
     {% include "analytics.njk" %}
-    <script src="{{ '/assets/js/tracking.js' | url }}" defer></script>
-    <script src="{{ '/assets/js/video-panels.js' | url }}" defer></script>
-    <script src="{{ '/assets/js/countdown.js' | url }}" defer></script>
+    <script>
+      (function () {
+        function loadScript(src) {
+          var script = document.createElement("script");
+          script.src = src;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+
+        if (document.querySelector(".track-event")) {
+          loadScript({{ ('/assets/js/tracking.js' | url) | dump | safe }});
+        }
+
+        if (document.querySelector(".video-bg__strip")) {
+          loadScript({{ ('/assets/js/video-panels.js' | url) | dump | safe }});
+        }
+
+        if (document.querySelector("[data-release-countdown], [data-release-cta], [data-release-show], [data-release-hide]")) {
+          loadScript({{ ('/assets/js/countdown.js' | url) | dump | safe }});
+        }
+      })();
+    </script>
   </body>
 </html>

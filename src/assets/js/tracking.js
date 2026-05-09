@@ -2,7 +2,7 @@
   var config = window.APP_CONFIG || {};
   var ga4Id = config.ga4MeasurementId;
   var pixelIds = Array.isArray(config.metaPixelIds) ? config.metaPixelIds.slice() : [];
-  var consentStatusEl = document.getElementById("consent-status");
+  var trackersBootstrapped = false;
 
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
@@ -42,6 +42,10 @@
     };
 
     gtag("js", new Date());
+    gtag("consent", "update", {
+      analytics_storage: "granted",
+      ad_storage: "granted"
+    });
     gtag("config", ga4Id, { anonymize_ip: true });
 
     return loadScript("https://www.googletagmanager.com/gtag/js?id=" + ga4Id).then(function () {
@@ -114,44 +118,30 @@
     });
   }
 
-  function updateConsentStatus() {
-    if (!consentStatusEl) {
+  function bootstrapTrackers() {
+    if (trackersBootstrapped) {
       return;
     }
-    var value = localStorage.getItem("tracking-consent");
-    if (value === "granted") {
-      consentStatusEl.textContent = "Tracking is enabled.";
-    } else if (value === "denied") {
-      consentStatusEl.textContent = "Tracking is disabled.";
-    } else {
-      consentStatusEl.textContent = "No preference selected yet.";
-    }
+
+    trackersBootstrapped = true;
+    Promise.all([setupGa4(), setupMetaPixel()]);
   }
 
-  function applyConsentButtons() {
-    var allowButton = document.getElementById("consent-allow");
-    var denyButton = document.getElementById("consent-deny");
+  function scheduleTrackerBootstrap() {
+    var run = function () {
+      bootstrapTrackers();
+    };
 
-    if (allowButton) {
-      allowButton.addEventListener("click", function () {
-        localStorage.setItem("tracking-consent", "granted");
-        Promise.all([setupGa4(), setupMetaPixel()]).finally(updateConsentStatus);
-      });
-    }
-
-    if (denyButton) {
-      denyButton.addEventListener("click", function () {
-        localStorage.setItem("tracking-consent", "denied");
-        updateConsentStatus();
-      });
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      setTimeout(run, 1200);
     }
   }
 
   function init() {
-    applyConsentButtons();
-    updateConsentStatus();
-
-    Promise.all([setupGa4(), setupMetaPixel()]).then(bindClickTracking);
+    bindClickTracking();
+    scheduleTrackerBootstrap();
   }
 
   if (document.readyState === "loading") {

@@ -251,10 +251,12 @@ h2 {
   display: block;
   width: min(100%, 200px);
   aspect-ratio: var(--artwork-ratio, 1 / 1);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-artwork-link {
-  display: block;
+  display: inline-block;
 }
 
 .hero-artwork .release-artwork {
@@ -482,40 +484,6 @@ h2 {
   height: 18px;
   display: block;
   border-radius: 3px;
-}
-
-.privacy p {
-  color: var(--ink-soft);
-  max-width: 72ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.consent-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 0.6rem;
-}
-
-.consent-btn {
-  border: 1px solid rgba(255, 232, 216, 0.16);
-  background: rgba(255, 255, 255, 0.025);
-  color: var(--ink-strong);
-  border-radius: 12px;
-  font-weight: 700;
-  padding: 0.58rem 0.92rem;
-  cursor: pointer;
-}
-
-.consent-btn.secondary {
-  background: rgba(255, 255, 255, 0.012);
-}
-
-.consent-status {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
 }
 
 @keyframes float {

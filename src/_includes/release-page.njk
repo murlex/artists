@@ -2,7 +2,7 @@
   {% if release.btsVideo %}
     <section class="video-bg video-bg--page" aria-hidden="true">
       <div class="video-bg__strip" data-video-density="{{ release.videoDensity or 'balanced' }}">
-        <video class="video-bg__video" autoplay muted loop playsinline>
+        <video class="video-bg__video" autoplay muted loop playsinline preload="metadata">
           <source src="{{ release.btsVideo | url }}" type="video/mp4">
         </video>
       </div>
@@ -143,6 +143,7 @@
                 width="{{ artworkWidth }}"
                 height="{{ artworkHeight }}"
                 loading="eager"
+                fetchpriority="high"
                 decoding="async"
               />
             </picture>
@@ -159,17 +160,5 @@
       <a class="social-pill track-event" href="{{ site.social.youtube }}" data-track-event="social_click" data-track-label="youtube" target="_blank" rel="noopener noreferrer">{% set name = "YouTube" %}{% include "social-icon.njk" %}<span>YouTube</span></a>
       <a class="social-pill track-event" href="{{ site.social.tiktok }}" data-track-event="social_click" data-track-label="tiktok" target="_blank" rel="noopener noreferrer">{% set name = "TikTok" %}{% include "social-icon.njk" %}<span>TikTok</span></a>
     </div>
-  </section>
-
-  <section class="privacy shell" hidden>
-    <h2>Tracking Preferences</h2>
-    <p>
-      This page can use Google Analytics 4 and Meta Pixel to measure link clicks and campaign performance.
-    </p>
-    <div class="consent-actions">
-      <button id="consent-allow" class="consent-btn">Allow Tracking</button>
-      <button id="consent-deny" class="consent-btn secondary">Decline Tracking</button>
-    </div>
-    <p class="consent-status" id="consent-status">No preference selected yet.</p>
   </section>
 </main>
